@@ -32,10 +32,7 @@ A REST API for managing student records built with Django REST Framework.
    DATABASE_URL=postgres://<user>:<password>@localhost:5432/student_db
    ```
 
-3. **Create the PostgreSQL database**
-   ```bash
-   createdb student_db
-   ```
+3. **Create the PostgreSQL database through PgAdmin**
 
 4. **Install dependencies**
    ```bash
