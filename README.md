@@ -8,48 +8,58 @@ A REST API for managing student records built with Django REST Framework.
 - PostgreSQL database
 - Health check endpoint
 
-## Requirements
+## Docker Setup
 
-- Python 3.12+
-- PostgreSQL
-- [uv](https://github.com/astral-sh/uv) package manager
-
-## Local Setup
-
-1. **Clone the repository**
-
-2. **Create environment file**
-
-   Copy the example environment file and configure it:
+1. **Create environment file**
    ```bash
    cp .env.example .env.local
    ```
+   Update `SECRET_KEY` and `DEBUG` in `.env.local`. The `DATABASE_URL` is configured by Docker Compose.
 
-   Update `.env.local` with your values:
+2. **Build and start containers**
+   ```bash
+   make docker-build
    ```
-   SECRET_KEY=<your-secret-key>
-   DEBUG=True
-   DATABASE_URL=postgres://<user>:<password>@localhost:5432/student_db
+
+3. **Run migrations**
+   ```bash
+   make docker-migrate
    ```
 
-3. **Create the PostgreSQL database through PgAdmin**
+4. **View logs**
+   ```bash
+   make docker-logs
+   ```
 
-4. **Install dependencies**
+5. **Stop containers**
+   ```bash
+   make docker-down
+   ```
+
+## Local setup (wihtout docker)
+
+1. **Create environment file**
+   ```bash
+   cp .env.example .env.local
+   ```
+   Update `SECRET_KEY`, `DEBUG`, and `DATABASE_URL` in `.env.local`.
+
+2. **Install dependencies**
    ```bash
    make install
    ```
 
-5. **Run migrations**
+3. **Run migrations**
    ```bash
    make migrate
    ```
 
-6. **Start the server**
+4. **Run server**
    ```bash
    make run
    ```
-
-   The API will be available at `http://localhost:8000`
+   
+The API will be available at `http://localhost:8000`
 
 ## API Endpoints
 
@@ -76,6 +86,13 @@ A REST API for managing student records built with Django REST Framework.
 
 ## Make Commands
 
+### Docker
+- `make docker-build` - Build and start containers
+- `make docker-migrate` - Run database migrations
+- `make docker-logs` - View container logs
+- `make docker-down` - Stop containers
+
+### Local Development
 - `make install` - Install dependencies
 - `make migrate` - Run database migrations
 - `make run` - Start the development server
